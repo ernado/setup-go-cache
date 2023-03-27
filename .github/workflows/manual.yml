@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CGO_ENABLED: 0
 
     steps:
       - uses: actions/checkout@v3
@@ -30,9 +32,5 @@ jobs:
             ${{ env.modcache }}
           key: release-${{ runner.os }}-go-${{ hashFiles('go.sum') }}
 
-      - name: Go build
-        env:
-          CGO_ENABLED: 0
-        run: |
-          - go env GOCACHE
-          - go build -v
+      - run: go env GOCACHE
+      - run: go build -v
