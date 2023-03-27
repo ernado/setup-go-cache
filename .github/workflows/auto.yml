@@ -20,6 +20,6 @@ jobs:
       - name: Go build
         env:
           CGO_ENABLED: 0
-        run:
+        run: |
           - go env GOCACHE
           - go build -v
