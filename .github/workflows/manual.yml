@@ -30,7 +30,9 @@ jobs:
           path: |
             ${{ env.cache }}
             ${{ env.modcache }}
-          key: release-${{ runner.os }}-go-${{ hashFiles('go.sum') }}
+          key: ${{ env.jobname }}-${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}-${{ hashFiles('**/go.mod') }}
+        env:
+          cache-name: jobname
 
       - run: go env GOCACHE
       - run: go build -v
