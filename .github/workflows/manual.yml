@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CGO_ENABLED: 0
+      cache_name: manual
 
     steps:
       - uses: actions/checkout@v3
@@ -30,9 +31,9 @@ jobs:
           path: |
             ${{ env.cache }}
             ${{ env.modcache }}
-          key: ${{ env.jobname }}-${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}-${{ hashFiles('**/go.mod') }}
-        env:
-          cache-name: jobname
+          key: ${{ env.cache_prefix }}-${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}-${{ hashFiles('**/go.mod') }}
+          restore-keys: |
+            ${{ env.cache_name }}-${{ runner.os }}-go-
 
       - run: go env GOCACHE
       - run: go build -v
