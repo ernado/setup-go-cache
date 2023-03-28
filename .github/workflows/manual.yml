@@ -31,7 +31,7 @@ jobs:
           path: |
             ${{ env.cache }}
             ${{ env.modcache }}
-          key: ${{ env.cache_prefix }}-${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}-${{ hashFiles('**/go.mod') }}
+          key: ${{ env.cache_name }}-${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}-${{ hashFiles('**/go.mod') }}
           restore-keys: |
             ${{ env.cache_name }}-${{ runner.os }}-go-
 
